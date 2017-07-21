@@ -37,13 +37,26 @@ struct LinkedList
 	struct Link* backSentinel;
 };
 
-/**
- * Allocates the list's sentinel and sets the size to 0.
- * The sentinels' next and prev should point to eachother or NULL
- * as appropriate.
- */
+
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     returns a pointer to 10 students
+*
+* Purpose:  allocates the list's sentinel and sets the size 
+*           the sentinels' next and prev should point to 
+*           each other or NULL as appropriate.
+************************************************************/
 static void init(struct LinkedList* list) {
 	// FIXME: you must write this
+    list->frontSentinel = malloc(sizeof(struct Link));
+    list->backSentinel = malloc(sizeof(struct Link));
+    assert(list->frontSentinel!=0);
+    assert(list->backSentinel!=0);
+    list->frontSentinel->next = list->backSentinel;
+    list->backSentinel->prev = list->frontSentinel;
+    list->size = 0;
     
 }
 
@@ -51,9 +64,8 @@ static void init(struct LinkedList* list) {
  * Adds a new link with the given value before the given link and
  * increments the list's size.
  */
-static void addLinkBefore(struct LinkedList* list, struct Link* link, TYPE value)
-{
-	// FIXME: you must write this
+static void addLinkBefore(struct LinkedList* list, struct Link* link, TYPE value){
+    
 }
 
 /**
