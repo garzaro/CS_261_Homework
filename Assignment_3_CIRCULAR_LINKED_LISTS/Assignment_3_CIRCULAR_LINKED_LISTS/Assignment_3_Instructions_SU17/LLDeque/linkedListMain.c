@@ -24,5 +24,8 @@ int main(){
        linkedListAdd(k, (TYPE)14);
        linkedListRemove(k, (TYPE)11);
        linkedListPrint(k);
+    
+    linkedListDestroy(k);
+    linkedListDestroy(l);
 	return 0;
 }
