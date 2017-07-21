@@ -110,13 +110,27 @@ static void addLinkBefore(struct LinkedList* list, struct Link* link, TYPE value
 *
 * Exit:     returns a pointer to 10 students
 *
-* Purpose:  allocates the list's sentinel and sets the size
-*           the sentinels' next and prev should point to
-*           each other or NULL as appropriate.
+* Purpose:  removes the given link from the list and decrements
+*           the list's size
 ************************************************************/
 static void removeLink(struct LinkedList* list, struct Link* link)
 {
-	// FIXME: you must write this
+    // assert list and link are not null
+    assert(list && link);
+    
+    // store links previous and next
+    struct Link*tempPrev = link->prev;
+    struct Link*tempNext = link->next;
+    
+    // free the link
+    free(link);
+    
+    // set stored links to point to each other
+    tempPrev->next = tempNext;
+    tempNext->prev = tempPrev;
+    
+    //decrement the list size
+    list->size--;
 }
 
 /**
