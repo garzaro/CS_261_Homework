@@ -227,15 +227,29 @@ void circularListDestroy(struct CircularList* list)
 ********************************************************************/
 void circularListAddFront(struct CircularList* list, TYPE value)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    
+    addLinkAfter(list, list->sentinel, value);
 }
 
-/**
- * Adds a new link with the given value to the back of the deque.
- */
+/*********************************************************************
+** Function: circularListAddBack
+** Description: adds a new link with the given value to the back of
+**              the deque
+**
+**
+** Parameters:  a CircularList and Value
+**
+** Pre-Conditions: the list has been initialized
+** Post-Conditions: a link with the value passed has been positioned
+**                  at the front
+**
+********************************************************************/
 void circularListAddBack(struct CircularList* list, TYPE value)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    
+    addLinkAfter(list, list->sentinel->prev, value);
 }
 
 /**
