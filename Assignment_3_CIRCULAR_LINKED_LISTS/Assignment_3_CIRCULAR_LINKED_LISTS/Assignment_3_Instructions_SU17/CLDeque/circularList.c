@@ -67,37 +67,80 @@ static void init(struct CircularList* list)
  */
 
 /*********************************************************************
-** Function: init
+** Function: createLink
 **
- ** Description: allocates the list's sentinel and sets the size, the
- **              along with both sentinels' next and prev pointers
- **
- ** Parameters:  a pointer to a list structure
- **
- ** Pre-Conditions:  NONE
- ** Post-Conditions: space allocated for front and back sentinels
- **                  front points to back and back points to front
- **                   <-front <=> back ->
- ********************************************************************/
+** Description: creates a link with the given value and NULL next and
+**              prev pointers
+**
+** Parameters:  a value
+**
+** Pre-Conditions:  NONE
+** Post-Conditions: space allocated for new Link with the passed value
+********************************************************************/
 static struct Link* createLink(TYPE value)
 {
-	// FIXME: you must write this
-	return NULL;
+    // allocate memory for newLink
+    struct Link * newLink = (struct Link*)malloc(sizeof(struct Link));
+    
+    // assert memory allocated properly
+    assert(newLink!=0);
+    
+    newLink->value = value;
+    
+    return newLink;
 }
 
-/**
- * Adds a new link with the given value after the given link and
- * increments the list's size.
- */
+
+/*********************************************************************
+** Function: addLinkAfter
+**
+** Description: adds a new link with the given value after the given
+**              link and increments the list's size
+**
+**
+** Parameters:  a CircularList, Link, and value
+**
+** Pre-Conditions: list and link are both initialized
+** Post-Conditions: new link with given value is added after passed 
+**                  link
+********************************************************************/
 static void addLinkAfter(struct CircularList* list, struct Link* link, TYPE value)
 {
-	// FIXME: you must write this
+	// check pre-conditions
+    assert(list!=0 && link!=0);
+    
+    // create link
+    struct Link * newLink = createLink(value);
+    
+    // store link next value in temp
+    struct Link * temp = link->next;
+    
+    // old next points back to newLink
+    temp->prev = newLink;
+    // new link points next to old next
+    newLink->next = temp;
+    
+    // passed link points next to newLink
+    link->next = newLink;
+    
+    // new link points back to passed link
+    newLink->prev = link;
 }
 
-/**
- * Removes the given link from the list and
- * decrements the list's size.
- */
+
+/*********************************************************************
+** Function: removeLink
+**
+** Description: removes the given link from the list and
+** decrements the list's size
+**
+**
+** Parameters:  a CircularList and Link
+**
+** Pre-Conditions: list and link are both initialized
+** Post-Conditions: link has been removed
+**                  
+********************************************************************/
 static void removeLink(struct CircularList* list, struct Link* link)
 {
 	// FIXME: you must write this
