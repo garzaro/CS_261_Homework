@@ -42,36 +42,78 @@ struct LinkedList
 /***********************************************************
 * Entry:    no entry is is requrired
 *
-* Exit:     returns a pointer to 10 students
+* Exit:     nothing returned
 *
 * Purpose:  allocates the list's sentinel and sets the size 
 *           the sentinels' next and prev should point to 
 *           each other or NULL as appropriate.
 ************************************************************/
 static void init(struct LinkedList* list) {
-	// FIXME: you must write this
+	// malloc both sentinels
     list->frontSentinel = malloc(sizeof(struct Link));
     list->backSentinel = malloc(sizeof(struct Link));
+    
+    // assert malloc occured properly
     assert(list->frontSentinel!=0);
     assert(list->backSentinel!=0);
+    
+    // set front and back pointing to each other
+    // with front's previous pointing to null
+    // and back's next pointing to null 
     list->frontSentinel->next = list->backSentinel;
     list->backSentinel->prev = list->frontSentinel;
     list->size = 0;
     
 }
 
-/**
- * Adds a new link with the given value before the given link and
- * increments the list's size.
- */
+
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+*
+* Purpose:  adds a new link with the given value before the 
+*           given link and increments the list's size
+************************************************************/
 static void addLinkBefore(struct LinkedList* list, struct Link* link, TYPE value){
     
+    // assert list and link are not null
+    assert(list && link);
+    
+    // malloc room for new link
+    struct Link* new = malloc(sizeof(struct Link));
+    assert(new!=0);
+    // assign value to new link
+    new->value = value;
+    
+    // store old link previous in temp
+    struct Link* temp = link->prev;
+    
+    // position new link before old link
+    new->prev = temp;
+    new->next = link;
+    link->prev = new;
+    temp->next = new;
+    
+    // incremenet size
+    list->size++;
 }
 
 /**
  * Removes the given link from the list and
  * decrements the list's size.
  */
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     returns a pointer to 10 students
+*
+* Purpose:  allocates the list's sentinel and sets the size
+*           the sentinels' next and prev should point to
+*           each other or NULL as appropriate.
+************************************************************/
 static void removeLink(struct LinkedList* list, struct Link* link)
 {
 	// FIXME: you must write this
