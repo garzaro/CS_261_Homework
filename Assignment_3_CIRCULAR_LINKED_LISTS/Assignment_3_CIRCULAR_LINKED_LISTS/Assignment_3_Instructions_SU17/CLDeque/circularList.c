@@ -125,6 +125,8 @@ static void addLinkAfter(struct CircularList* list, struct Link* link, TYPE valu
     
     // new link points back to passed link
     newLink->prev = link;
+    
+    list->size++
 }
 
 
@@ -143,12 +145,36 @@ static void addLinkAfter(struct CircularList* list, struct Link* link, TYPE valu
 ********************************************************************/
 static void removeLink(struct CircularList* list, struct Link* link)
 {
-	// FIXME: you must write this
+	//check pre-conditions
+    assert(list!=0 && link!=0);
+    
+    // store links next and previous values;
+    struct Link * tempN = link->next;
+    struct Link * tempP = link->prev;
+    
+    // free the link
+    free(link);
+    
+    // set temps to point to each other
+    tempN->prev = tempP;
+    tempP->next = tempN;
+    
+    list->size--;
+    
 }
 
-/**
- * Allocates and initializes a list.
- */
+/*********************************************************************
+** Function: circularListCreate
+**
+** Description: allocates and initializes a list
+**
+**
+** Parameters:  none
+**
+** Pre-Conditions: none
+** Post-Conditions: returns an allocated and initiallized list
+**                  link
+********************************************************************/
 struct CircularList* circularListCreate()
 {
 	struct CircularList* list = malloc(sizeof(struct CircularList));
@@ -156,17 +182,49 @@ struct CircularList* circularListCreate()
 	return list;
 }
 
-/**
- * Deallocates every link in the list and frees the list pointer.
- */
+/*********************************************************************
+** Function: circularListDestroy
+**
+** Description: destroys a CircularList
+**
+** Parameters:  a CircularListn
+**
+** Pre-Conditions: the passed list has space allocated for it
+** Post-Conditions: list has been destroyed all allocated mem locations
+**                  have been freed
+********************************************************************/
 void circularListDestroy(struct CircularList* list)
 {
-	// FIXME: you must write this
+	// check that list is not null
+    assert(list!=0);
+    
+    // remove all links
+    struct Link* temp = list->sentinel->next;
+    
+    while(temp != list->sentinel){
+        removeLink(list, temp);
+        temp = temp->next;
+    }
+    
+    assert(list->sentinel!=0);
+    free(list->sentinel);
+    free(list);
 }
 
-/**
- * Adds a new link with the given value to the front of the deque.
- */
+
+/*********************************************************************
+** Function: circularListAddFront
+** Description: adds a new link with the given value to the front of 
+**              the deque
+**
+**
+** Parameters:  a CircularList and Value
+**
+** Pre-Conditions: the list has been initialized
+** Post-Conditions: a link with the value passed has been positioned
+**                  at the front
+**
+********************************************************************/
 void circularListAddFront(struct CircularList* list, TYPE value)
 {
 	// FIXME: you must write this
