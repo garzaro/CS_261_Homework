@@ -252,22 +252,41 @@ void circularListAddBack(struct CircularList* list, TYPE value)
     addLinkAfter(list, list->sentinel->prev, value);
 }
 
-/**
- * Returns the value of the link at the front of the deque.
- */
+
+/*********************************************************************
+** Function: circularListFront
+** Description: returns the value at the front of the circularList
+**
+**
+** Parameters:  a CircularList
+**
+** Pre-Conditions: the list has been initialized
+** Post-Conditions: the first link value has been returned
+**
+********************************************************************/
 TYPE circularListFront(struct CircularList* list)
 {
-	// FIXME: you must write this
-	return 0;
+    assert(list!=0);
+    
+    return list->sentinel->next->value;
 }
 
-/**
- * Returns the value of the link at the back of the deque.
- */
+/*********************************************************************
+ ** Function: circularListBack
+ ** Description: returns the value at the back of the circularList
+ **
+ ** Parameters:  a CircularList
+ **
+ ** Pre-Conditions: the list has been initialized
+ ** Post-Conditions: the last link value has been returned
+ **
+ **
+ ********************************************************************/
 TYPE circularListBack(struct CircularList* list)
 {
-	// FIXME: you must write this
-	return 0;
+    assert(list!=0);
+    
+    return list->sentinel->prev->value;
 }
 
 /**
