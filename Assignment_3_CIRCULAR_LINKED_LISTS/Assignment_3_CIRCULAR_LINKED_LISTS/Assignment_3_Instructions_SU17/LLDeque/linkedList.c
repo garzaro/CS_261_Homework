@@ -44,14 +44,28 @@ struct LinkedList
 *
 * Exit:     nothing returned
 *
-* Purpose:  allocates the list's sentinel and sets the size 
-*           the sentinels' next and prev should point to 
-*           each other or NULL as appropriate.
+* Description:  allocates the list's sentinel and sets the size
+*               the sentinels' next and prev should point to
+*               each other or NULL as appropriate.
 ************************************************************/
+
+/*********************************************************************
+** Function: init
+**
+** Description: allocates the list's sentinel and sets the size, the
+**              along with both sentinels' next and prev pointers
+**
+** Parameters:  a pointer to a list structure
+**
+** Pre-Conditions:  NONE
+** Post-Conditions: space allocated for front and back sentinels 
+**                  front points to back and back points to front 
+**                   <-front <=> back ->
+********************************************************************/
 static void init(struct LinkedList* list) {
 	// malloc both sentinels
-    list->frontSentinel = malloc(sizeof(struct Link));
-    list->backSentinel = malloc(sizeof(struct Link));
+    list->frontSentinel =(struct Link*)malloc(sizeof(struct Link));
+    list->backSentinel = (struct Link*)malloc(sizeof(struct Link));
     
     // assert malloc occured properly
     assert(list->frontSentinel!=0);
@@ -68,14 +82,20 @@ static void init(struct LinkedList* list) {
 
 
 
-/***********************************************************
-* Entry:    no entry is is requrired
-*
-* Exit:     nothing returned
-*
-* Purpose:  adds a new link with the given value before the 
-*           given link and increments the list's size
-************************************************************/
+
+/*********************************************************************
+** Function: addLinkBefore
+**
+** Description: adds a newl link with the given value before the given
+**              link and increments the list's size
+**
+** Parameters: a List, Link, and value
+**
+** Pre-Conditions:  both the list and the link have space allocated for
+**                  them
+** Post-Conditions: space has been allocated for a new link, the new
+**                  link has been positioned before the
+*********************************************************************/
 static void addLinkBefore(struct LinkedList* list, struct Link* link, TYPE value){
     
     // assert list and link are not null
@@ -90,6 +110,7 @@ static void addLinkBefore(struct LinkedList* list, struct Link* link, TYPE value
     // store old link previous in temp
     struct Link* temp = link->prev;
     
+    assert(temp!=0);
     // position new link before old link
     new->prev = temp;
     new->next = link;
@@ -100,10 +121,6 @@ static void addLinkBefore(struct LinkedList* list, struct Link* link, TYPE value
     list->size++;
 }
 
-/**
- * Removes the given link from the list and
- * decrements the list's size.
- */
 
 /***********************************************************
 * Entry:    no entry is is requrired
@@ -133,9 +150,14 @@ static void removeLink(struct LinkedList* list, struct Link* link)
     list->size--;
 }
 
-/**
- * Allocates and initializes a list.
- */
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+*
+* Purpose:  allocates and initializes a list
+************************************************************/
 struct LinkedList* linkedListCreate()
 {
 	struct LinkedList* newDeque = malloc(sizeof(struct LinkedList));
@@ -143,10 +165,16 @@ struct LinkedList* linkedListCreate()
 	return newDeque;
 }
 
-/**
- * Deallocates every link in the list including the sentinels,
- * and frees the list itself.
- */
+
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+*
+* Purpose:  deallocates every link in the list including the
+*           sentinels, and frees the list itself
+************************************************************/
 void linkedListDestroy(struct LinkedList* list)
 {
 	while (!linkedListIsEmpty(list))
@@ -158,90 +186,198 @@ void linkedListDestroy(struct LinkedList* list)
 	free(list);
 }
 
-/**
- * Adds a new link with the given value to the front of the deque.
- */
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+*
+* Purpose:  adds a new link to the front of a list
+************************************************************/
 void linkedListAddFront(struct LinkedList* list, TYPE value)
 {
-	// FIXME: you must write this
+    
+    addLinkBefore(list, list->frontSentinel->next, value);
+    
 }
 
-/**
- * Adds a new link with the given value to the back of the deque.
- */
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+*
+* Purpose:  adds a new link with the given value to the back
+*           of the queue
+************************************************************/
 void linkedListAddBack(struct LinkedList* list, TYPE value)
 {
-	// FIXME: you must write this
+    addLinkBefore(list, list->backSentinel, value);
 }
 
-/**
- * Returns the value of the link at the front of the deque.
- */
+
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+*
+* Purpose:  returns the value of the link at the front of 
+*           the deque
+************************************************************/
 TYPE linkedListFront(struct LinkedList* list)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    assert(list->frontSentinel->next!= list->backSentinel);
+    return list->frontSentinel->next->value;
 }
 
-/**
- * Returns the value of the link at the back of the deque.
- */
+
+
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+*
+* Purpose:  returns the value of the link at hte back of the 
+*           deque.
+************************************************************/
 TYPE linkedListBack(struct LinkedList* list)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    assert(list->backSentinel->prev!= list->frontSentinel);
+    return list->backSentinel->prev->value;
 }
 
-/**
- * Removes the link at the front of the deque.
- */
+
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+*
+* Purpose:  removes the link at the front of the deque.
+************************************************************/
 void linkedListRemoveFront(struct LinkedList* list)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    assert(list->frontSentinel->next!= list->backSentinel);
+    removeLink(list, list->frontSentinel->next);
 }
 
-/**
- * Removes the link at the back of the deque.
- */
+
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+*
+* Purpose:  removes the link at the back of the deque
+************************************************************/
 void linkedListRemoveBack(struct LinkedList* list)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    assert(list->backSentinel->prev != list->frontSentinel);
+    removeLink(list, list->backSentinel->prev);
 }
 
-/**
- * Returns 1 if the deque is empty and 0 otherwise.
- */
+
+
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+*
+* Purpose:  returns 1 if the deque is empty and 0 otherwise
+************************************************************/
 int linkedListIsEmpty(struct LinkedList* list)
 {
-	// FIXME: you must write this
+    if(list->size == 0) return 1;
+    else return 0;
 }
 
-/**
- * Prints the values of the links in the deque from front to back.
- */
+
+
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+*
+* Purpose:  prints the values of the links in the deque from 
+*           front to back
+************************************************************/
 void linkedListPrint(struct LinkedList* list)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    struct Link* temp = list->frontSentinel->next;
+    while(temp!= list->backSentinel){
+        printf("%d ", temp->value);
+        temp = temp->next;
+    }
+    printf("\n");
 }
 
-/**
- * Adds a link with the given value to the bag.
- */
+
+
+
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+*
+* Purpose:  adds a link with the given value to the bag
+************************************************************/
 void linkedListAdd(struct LinkedList* list, TYPE value)
 {
-	// FIXME: you must write this
+    linkedListAddBack(list, value);
 }
 
-/**
- * Returns 1 if a link with the value is in the bag and 0 otherwise.
- */
+
+
+
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+* 
+* Purpose:  returns 1 if a link with the value is in the bag
+*           and 0 otherwise
+************************************************************/
 int linkedListContains(struct LinkedList* list, TYPE value)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    struct Link* temp = list->frontSentinel->next;
+    while(temp!= list->backSentinel){
+        if(EQ(value, temp->value)) return 1;
+        temp = temp->next;
+    }
+    
+    return 0;
+    
 }
 
-/**
- * Removes the first occurrence of a link with the given value.
- */
+/***********************************************************
+* Entry:    no entry is is requrired
+*
+* Exit:     nothing returned
+*
+* Purpose:  adds a new link with the given value before the
+*           given link and increments the list's size
+************************************************************/
 void linkedListRemove(struct LinkedList* list, TYPE value)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    struct Link* temp = list->frontSentinel->next;
+
+    while(temp!= list->backSentinel){
+        if(temp->value == value){
+            removeLink(list, temp);
+            break;
+        }
+        temp = temp->next;
+    }
 }
