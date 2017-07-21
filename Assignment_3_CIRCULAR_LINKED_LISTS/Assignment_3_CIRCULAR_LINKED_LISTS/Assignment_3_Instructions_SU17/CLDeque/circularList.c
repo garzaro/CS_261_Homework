@@ -126,7 +126,7 @@ static void addLinkAfter(struct CircularList* list, struct Link* link, TYPE valu
     // new link points back to passed link
     newLink->prev = link;
     
-    list->size++
+    list->size++;
 }
 
 
@@ -289,43 +289,107 @@ TYPE circularListBack(struct CircularList* list)
     return list->sentinel->prev->value;
 }
 
-/**
- * Removes the link at the front of the deque.
- */
+/*********************************************************************
+** Function: circularListRemoveFront
+** Description: removes the link at the front of the circularList
+**
+** Parameters:  a CircularList
+**
+** Pre-Conditions: the list has been initialized
+** Post-Conditions: the first link has been removed
+**
+**
+********************************************************************/
 void circularListRemoveFront(struct CircularList* list)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    assert(list->sentinel->next!=list->sentinel);
+    
+    removeLink(list, list->sentinel->next);
+    
 }
 
-/**
- * Removes the link at the back of the deque.
- */
+/*********************************************************************
+** Function: circularListRemoveBack
+** Description: removes the link at the back of the circularList
+**
+** Parameters:  a CircularList
+**
+** Pre-Conditions: the list has been initialized
+** Post-Conditions: the first link has been removed
+**
+**
+*******************************************************************/
 void circularListRemoveBack(struct CircularList* list)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    assert(list->sentinel->prev!=list->sentinel);
+    
+    removeLink(list, list->sentinel->prev);
 }
 
-/**
- * Returns 1 if the deque is empty and 0 otherwise.
- */
+/*********************************************************************
+** Function: circularListisEmpty
+** Description: returns 1 if list is empty and 0 if not
+**
+** Parameters:  a CircularList
+**
+** Pre-Conditions: the list has been initialized
+** Post-Conditions: returns 1 if list is empty and 0 if not
+**
+**
+*******************************************************************/
 int circularListIsEmpty(struct CircularList* list)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    if(list->size == 0){
+        return 1;
+    }
 	return 0;
 }
 
-/**
- * Prints the values of the links in the deque from front to back.
- */
+/*********************************************************************
+** Function: circularListPrint
+** Description: prints each link in the list
+**
+** Parameters:  a CircularList
+**
+** Pre-Conditions: the list has been initialized
+** Post-Conditions: the list of link values has been printed
+**
+**
+*******************************************************************/
 void circularListPrint(struct CircularList* list)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    
+    struct Link * temp = list->sentinel->next;
+    while(temp!= list->sentinel){
+        printf("%f ", temp->value);
+        temp = temp->next;
+    }
+    printf("\n");
 }
 
-/**
- * Reverses the deque.
- */
+/*********************************************************************
+** Function: circularListReverse
+** Description: reverses the list
+**
+** Parameters:  a CircularList
+**
+** Pre-Conditions: the list has been initialized
+** Post-Conditions: the list of links has been reversed
+**
+**
+*******************************************************************/
 void circularListReverse(struct CircularList* list)
 {
-	// FIXME: you must write this
+    assert(list!=0);
+    assert(list->sentinel->next!=list->sentinel);
+    struct Link * temp = list->sentinel->next;
+    while(temp!= list->sentinel){
+        circularListAddBack(list, temp->value);
+        temp = temp->next;
+        circularListRemoveFront(list);
+    }
 }
