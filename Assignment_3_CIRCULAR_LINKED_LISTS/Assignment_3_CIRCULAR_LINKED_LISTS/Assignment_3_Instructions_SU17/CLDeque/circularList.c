@@ -1,3 +1,21 @@
+/***********************************************************
+* Author:                       Romano Garza
+* Date Created:                 07/21/17
+* Last Modification Date:       07/21/17
+* Filename:                     linkedList.c
+*
+* Overview:
+*   This file contains the function definitions for a program
+*   that creates and modifies a circular linked list
+*
+*
+* Input:
+*   No input is required.
+*
+* Output:
+*   No output
+************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -17,18 +35,50 @@ struct CircularList
 	struct Link* sentinel;
 };
 
-/**
- * Allocates the list's sentinel and sets the size to 0.
- * The sentinel's next and prev should point to the sentinel itself.
- */
+
+/*********************************************************************
+** Function: init
+**
+** Description: allocates the list's sentinel and sets the size, the
+**              along with both sentinels' next and prev pointers 
+**
+** Parameters:  a pointer to a list structure
+**
+** Pre-Conditions:  NONE
+** Post-Conditions: space allocated for the front/back sentinel
+**                  sentinel points to itself
+********************************************************************/
 static void init(struct CircularList* list)
 {
 	// FIXME: you must write this
+    list->sentinel= (struct Link*)malloc(sizeof(struct Link));
+    
+    // assert malloc occured properly
+    assert(list->sentinel);
+    
+    // set sentinel to poin to itself
+    list->sentinel->next = list->sentinel;
+    list->sentinel->prev = list->sentinel;
+    list->size = 0;
 }
 
 /**
  * Creates a link with the given value and NULL next and prev pointers.
  */
+
+/*********************************************************************
+** Function: init
+**
+ ** Description: allocates the list's sentinel and sets the size, the
+ **              along with both sentinels' next and prev pointers
+ **
+ ** Parameters:  a pointer to a list structure
+ **
+ ** Pre-Conditions:  NONE
+ ** Post-Conditions: space allocated for front and back sentinels
+ **                  front points to back and back points to front
+ **                   <-front <=> back ->
+ ********************************************************************/
 static struct Link* createLink(TYPE value)
 {
 	// FIXME: you must write this

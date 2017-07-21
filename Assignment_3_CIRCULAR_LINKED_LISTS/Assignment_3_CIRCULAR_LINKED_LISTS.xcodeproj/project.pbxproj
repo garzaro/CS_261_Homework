@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EC6ED68C1F21E31B007B3330 /* linkedList.c in Sources */ = {isa = PBXBuildFile; fileRef = EC6ED6851F21E31B007B3330 /* linkedList.c */; };
-		EC6ED68D1F21E31B007B3330 /* linkedListMain.c in Sources */ = {isa = PBXBuildFile; fileRef = EC6ED6871F21E31B007B3330 /* linkedListMain.c */; };
-		EC6ED68E1F21E31B007B3330 /* makefile in Sources */ = {isa = PBXBuildFile; fileRef = EC6ED6881F21E31B007B3330 /* makefile */; };
+		D13C9EC21F22AC15009B84EB /* circularList.c in Sources */ = {isa = PBXBuildFile; fileRef = D13C9EBF1F22AC15009B84EB /* circularList.c */; };
+		D13C9EC31F22AC15009B84EB /* circularListMain.c in Sources */ = {isa = PBXBuildFile; fileRef = D13C9EC11F22AC15009B84EB /* circularListMain.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,11 +24,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D13C9EBE1F22ABF2009B84EB /* CLDeque */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CLDeque; sourceTree = "<group>"; };
+		D13C9EBF1F22AC15009B84EB /* circularList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = circularList.c; path = Assignment_3_CIRCULAR_LINKED_LISTS/Assignment_3_Instructions_SU17/CLDeque/circularList.c; sourceTree = "<group>"; };
+		D13C9EC01F22AC15009B84EB /* circularList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = circularList.h; path = Assignment_3_CIRCULAR_LINKED_LISTS/Assignment_3_Instructions_SU17/CLDeque/circularList.h; sourceTree = "<group>"; };
+		D13C9EC11F22AC15009B84EB /* circularListMain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = circularListMain.c; path = Assignment_3_CIRCULAR_LINKED_LISTS/Assignment_3_Instructions_SU17/CLDeque/circularListMain.c; sourceTree = "<group>"; };
 		EC6ED6741F21E309007B3330 /* Assignment_3_CIRCULAR_LINKED_LISTS */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Assignment_3_CIRCULAR_LINKED_LISTS; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC6ED6851F21E31B007B3330 /* linkedList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = linkedList.c; path = Assignment_3_Instructions_SU17/LLDeque/linkedList.c; sourceTree = "<group>"; };
-		EC6ED6861F21E31B007B3330 /* linkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = linkedList.h; path = Assignment_3_Instructions_SU17/LLDeque/linkedList.h; sourceTree = "<group>"; };
-		EC6ED6871F21E31B007B3330 /* linkedListMain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = linkedListMain.c; path = Assignment_3_Instructions_SU17/LLDeque/linkedListMain.c; sourceTree = "<group>"; };
-		EC6ED6881F21E31B007B3330 /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +45,9 @@
 		EC6ED66B1F21E308007B3330 = {
 			isa = PBXGroup;
 			children = (
+				D13C9EBF1F22AC15009B84EB /* circularList.c */,
+				D13C9EC01F22AC15009B84EB /* circularList.h */,
+				D13C9EC11F22AC15009B84EB /* circularListMain.c */,
 				EC6ED6761F21E309007B3330 /* Assignment_3_CIRCULAR_LINKED_LISTS */,
 				EC6ED6751F21E309007B3330 /* Products */,
 			);
@@ -62,9 +64,6 @@
 		EC6ED6761F21E309007B3330 /* Assignment_3_CIRCULAR_LINKED_LISTS */ = {
 			isa = PBXGroup;
 			children = (
-				EC6ED6871F21E31B007B3330 /* linkedListMain.c */,
-				EC6ED6851F21E31B007B3330 /* linkedList.c */,
-				EC6ED6861F21E31B007B3330 /* linkedList.h */,
 				EC6ED67E1F21E31B007B3330 /* Assignment_3_Instructions_SU17 */,
 			);
 			path = Assignment_3_CIRCULAR_LINKED_LISTS;
@@ -73,17 +72,9 @@
 		EC6ED67E1F21E31B007B3330 /* Assignment_3_Instructions_SU17 */ = {
 			isa = PBXGroup;
 			children = (
-				EC6ED6841F21E31B007B3330 /* LLDeque */,
+				D13C9EBE1F22ABF2009B84EB /* CLDeque */,
 			);
 			path = Assignment_3_Instructions_SU17;
-			sourceTree = "<group>";
-		};
-		EC6ED6841F21E31B007B3330 /* LLDeque */ = {
-			isa = PBXGroup;
-			children = (
-				EC6ED6881F21E31B007B3330 /* makefile */,
-			);
-			path = LLDeque;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,9 +134,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC6ED68E1F21E31B007B3330 /* makefile in Sources */,
-				EC6ED68D1F21E31B007B3330 /* linkedListMain.c in Sources */,
-				EC6ED68C1F21E31B007B3330 /* linkedList.c in Sources */,
+				D13C9EC21F22AC15009B84EB /* circularList.c in Sources */,
+				D13C9EC31F22AC15009B84EB /* circularListMain.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +262,7 @@
 				EC6ED67D1F21E309007B3330 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
