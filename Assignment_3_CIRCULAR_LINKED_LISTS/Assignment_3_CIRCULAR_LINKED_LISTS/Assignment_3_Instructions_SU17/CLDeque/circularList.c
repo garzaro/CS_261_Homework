@@ -54,7 +54,7 @@ static void init(struct CircularList* list)
     list->sentinel= (struct Link*)malloc(sizeof(struct Link));
     
     // assert malloc occured properly
-    assert(list->sentinel);
+    assert(list->sentinel !=0);
     
     // set sentinel to poin to itself
     list->sentinel->next = list->sentinel;
@@ -196,17 +196,13 @@ struct CircularList* circularListCreate()
 void circularListDestroy(struct CircularList* list)
 {
 	// check that list is not null
-    assert(list!=0);
+    assert(list!=0 && list->size>0);
     
     // remove all links
-    struct Link* temp = list->sentinel->next;
-    
-    while(temp != list->sentinel){
-        removeLink(list, temp);
-        temp = temp->next;
+    while(list->size!=0){
+        circularListRemoveFront(list);
     }
     
-    assert(list->sentinel!=0);
     free(list->sentinel);
     free(list);
 }
@@ -386,10 +382,29 @@ void circularListReverse(struct CircularList* list)
 {
     assert(list!=0);
     assert(list->sentinel->next!=list->sentinel);
-    struct Link * temp = list->sentinel->next;
-    while(temp!= list->sentinel){
-        circularListAddBack(list, temp->value);
-        temp = temp->next;
-        circularListRemoveFront(list);
+    
+    // Links for storing next and last elements to move
+    struct Link * next = list->sentinel->prev;
+    struct Link * last = list->sentinel;
+    
+    // count for how many elements to move
+    int count = list->size;
+    
+    
+    while(count!=0){
+        // add link after the last element to be moved
+        // initially this is just the sentinel
+        addLinkAfter(list, last, next->value);
+        
+        // update last element to be moved
+        last = last->next;
+        // update the next element to be moved
+        next = next->prev;
+        
+        // remove the element that was copied
+        circularListRemoveBack(list);
+        
+        
+        count--;
     }
 }
