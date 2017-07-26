@@ -28,6 +28,7 @@
 		D15661771F29170D00915C22 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		D156617E1F2918B800915C22 /* worksheet_31.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = worksheet_31.c; sourceTree = "<group>"; };
 		D156617F1F2918B800915C22 /* worksheet_31.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = worksheet_31.h; sourceTree = "<group>"; };
+		D15661811F29191700915C22 /* worksheet_AVL_Tree_Practice.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = worksheet_AVL_Tree_Practice.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +64,7 @@
 				D15661771F29170D00915C22 /* main.c */,
 				D156617E1F2918B800915C22 /* worksheet_31.c */,
 				D156617F1F2918B800915C22 /* worksheet_31.h */,
+				D15661811F29191700915C22 /* worksheet_AVL_Tree_Practice.txt */,
 			);
 			path = Worksheets_AVL_Heaps;
 			sourceTree = "<group>";
